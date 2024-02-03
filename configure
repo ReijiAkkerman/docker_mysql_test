@@ -1,0 +1,13 @@
+#!/bin/bash
+cd /var/www
+git clone https://github.com/reijiakkerman/aniproject.ru.git
+rm -f -R html
+mv aniproject.ru/ html/
+echo "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'KisaragiEki4';" | mysql > /src/info
+service mysql restart
+apt-get install -y phpmyadmin
+cp apache.conf /etc/phpmyadmin/
+ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+a2enconf phpmyadmin.conf
+service apache2 restart
+echo "It's ok!!!"

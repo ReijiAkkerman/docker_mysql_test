@@ -1,0 +1,9 @@
+#!/bin/bash
+
+counter=$(<counter)
+if [[ "$counter" == "configure" ]]; then
+	/src/configure
+else
+	service apache2 start
+fi
+echo "start" > counter
